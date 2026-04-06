@@ -10,24 +10,8 @@
  - 📱 Responsive and User-Friendly Design
  - 🔎 Easy Navigation and Clean UI
 ## 🛠 Technologies Used
-Frontend: React.js, HTML, CSS
-Styling:  CSS
-
-## 📁 Folder Structure
-
-career-recommendation/
-│
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── styles/
-│   ├── App.jsx
-│   └── main.jsx
-│
-├── public/
-├── package.json
-└── README.md
-
+ - Frontend: React.js, HTML, CSS
+ - Styling:  CSS
 ## ⚡ Getting Started
 ### 1. Clone the Repository
 Bash
