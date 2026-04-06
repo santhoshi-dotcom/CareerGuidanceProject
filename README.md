@@ -14,8 +14,8 @@
  - Styling:  CSS
 ## ⚡ Getting Started
 ### 1. Clone the Repository
-Bash
-git clone https://github.com/your-username/career-recommendation.git
+
+- git clone:https://github.com/santhoshi-dotcom/CareerGuidanceProject
 ### 2. Install Dependencies
 - npm install
 ### 3. Run the Project
@@ -34,6 +34,8 @@ git clone https://github.com/your-username/career-recommendation.git
 - Software Developer
 - Data Analyst
 - AI Engineer
+- FullStack developer
+- UI/UX Designer
 ## 🔮 Future Improvements
 - 🎯 AI/ML-based recommendation engine
 - 📊 Dashboard with analytics
