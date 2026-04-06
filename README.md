@@ -17,10 +17,9 @@
 Bash
 git clone https://github.com/your-username/career-recommendation.git
 ### 2. Install Dependencies
-npm install
+- npm install
 ### 3. Run the Project
-
-### npm run dev
+ - npm run dev
 ## 🧩 Usage
 - Create a new account or log in
 - Enter your skills, interests, and preferences
