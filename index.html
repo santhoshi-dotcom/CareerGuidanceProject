@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RePlate Login</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: Arial, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background-image:url("https://images.unsplash.com/photo-1606787366850-de6330128bfc");
+background-size:cover;
+background-position:center;
+}
+
+/* Login Card */
+
+.login-box{
+width:380px;
+background:white;
+padding:35px;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+.logo{
+font-size:40px;
+margin-bottom:5px;
+}
+
+h1{
+font-size:28px;
+color:#2d3748;
+margin-bottom:5px;
+}
+
+.subtitle{
+font-size:14px;
+color:#718096;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+text-align:left;
+margin-bottom:5px;
+font-weight:600;
+color:#4a5568;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:18px;
+border:1px solid #e2e8f0;
+border-radius:8px;
+font-size:14px;
+}
+
+.signin-btn{
+width:100%;
+padding:12px;
+background:#2f855a;
+color:white;
+border:none;
+border-radius:8px;
+font-size:15px;
+cursor:pointer;
+}
+
+.signin-btn:hover{
+background:#276749;
+}
+
+/* Divider */
+
+.divider{
+display:flex;
+align-items:center;
+margin:20px 0;
+color:#a0aec0;
+font-size:14px;
+}
+
+.divider::before,
+.divider::after{
+content:"";
+flex:1;
+height:1px;
+background:#e2e8f0;
+margin:0 10px;
+}
+
+/* Google Button */
+
+.google-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+width:100%;
+padding:11px;
+border:1px solid #e2e8f0;
+border-radius:8px;
+background:white;
+cursor:pointer;
+font-size:15px;
+}
+
+.google-btn:hover{
+background:#f7fafc;
+}
+
+.google-icon{
+width:20px;
+height:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<div class="logo">🍽️</div>
+
+<h1>RePlate</h1>
+<p class="subtitle">Zero Waste Food Donation System</p>
+
+<form onsubmit="handleLogin(event)">
+
+<label>Username</label>
+<input type="text" placeholder="Enter your username">
+
+<label>Password</label>
+<input type="password" placeholder="Enter password">
+
+<button class="signin-btn" type="submit">Sign In</button>
+
+</form>
+
+<div class="divider">OR</div>
+
+<button class="google-btn" onclick="googleLogin()">
+
+<!-- Original Google Icon Colors -->
+
+<svg class="google-icon" viewBox="0 0 48 48">
+<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.61l6.85-6.85C35.64 2.29 30.27 0 24 0 14.82 0 6.73 5.16 2.69 12.69l7.98 6.2C12.44 13.05 17.75 9.5 24 9.5z"/>
+<path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.22-.43-4.74H24v9h12.74c-.55 2.96-2.23 5.48-4.75 7.17l7.3 5.67C43.84 37.18 46.5 31.4 46.5 24.5z"/>
+<path fill="#FBBC05" d="M10.67 28.89A14.48 14.48 0 019.5 24c0-1.69.29-3.31.82-4.82l-7.98-6.2A23.93 23.93 0 000 24c0 3.87.93 7.52 2.58 10.73l8.09-5.84z"/>
+<path fill="#34A853" d="M24 48c6.48 0 11.92-2.14 15.89-5.82l-7.3-5.67c-2.03 1.36-4.63 2.16-8.59 2.16-6.25 0-11.56-3.55-13.46-8.39l-8.09 5.84C6.5 42.9 14.66 48 24 48z"/>
+</svg>
+
+Continue with Google
+
+</button>
+
+</div>
+
+<script>
+
+/* Frontend fake Google login */
+
+function googleLogin(){
+alert("Signing in with Google...");
+window.location.href="home.html";
+}
+function handleLogin(event){
+    event.preventDefault(); // stops page reload
+    window.location.href = "home.html";
+}
+
+
+</script>
+
+</body>
+</html>

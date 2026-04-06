@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RePlate - Zero Waste Food Donation</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav>
+<div class="logo">Re<span>Plate</span></div>
+
+<div>
+<a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+<a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+<a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+<a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+</div>
+</nav>
+
+<!-- Hero Section -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<button class="btn"
+onmouseover="showQuote()"
+onmouseout="hideQuote()"
+onclick="showForm()">
+Donate Food
+</button>
+
+<h1 id="donateQuote" style="display:none; margin-top:20px;">
+Don't Waste Food, Donate it to someone in need ❤️
+</h1>
+
+</div>
+
+</section>
+
+<!-- Donation Form -->
+
+<section id="donationForm" style="display:none;">
+
+<form id="donateForm" onsubmit="saveDonation(event)">
+
+<h2 style="text-align:center;margin-bottom:25px;">Food Donation Form</h2>
+
+<input type="text" id="Name" placeholder="Donator Name" required>
+
+<input type="tel" id="Mobile" placeholder="Phone Number"
+onblur="checkNumber()" onfocus="highlight(this)" required>
+
+<p id="msg"></p>
+
+<input type="text" id="Address" placeholder="Address / Contact Details" required>
+
+<input type="text" id="Foodname" placeholder="Food Name" required>
+
+<select id="Foodtype" onchange="selectProduct()" required>
+
+<option value="">Select Food Type</option>
+<option value="Vegetarian">Vegetarian</option>
+<option value="Non-Vegetarian">Non-Vegetarian</option>
+
+</select>
+
+<p id="resu"></p>
+
+<input type="number" id="Quantity" placeholder="Quantity (kg / plates)" required>
+
+<select id="Condition" required>
+
+<option value="">Food Condition</option>
+<option>Raw</option>
+<option>Packed</option>
+<option>Cooked</option>
+
+</select>
+
+<textarea id="Details" placeholder="Additional Details"></textarea>
+
+<button type="submit">Submit Donation</button>
+
+</form>
+
+</section>
+
+<!-- Success Popup -->
+
+<div id="successPopup" class="popup">
+
+<div class="popup-content">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h3>Donation Successful!</h3>
+
+<p>❤️ Thank you for donating food.<br>
+Your kindness can feed someone in need.</p>
+
+<button onclick="closePopup()">Back to Home</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* Highlight input */
+
+function highlight(field){
+field.style.backgroundColor="lightgreen";
+}
+
+/* Quote */
+
+function showQuote(){
+document.getElementById("donateQuote").style.display="block";
+}
+
+function hideQuote(){
+document.getElementById("donateQuote").style.display="none";
+}
+
+/* Show Form */
+
+function showForm(){
+document.getElementById("donationForm").style.display="block";
+document.getElementById("donationForm").scrollIntoView({behavior:"smooth"});
+}
+
+/* Phone Validation */
+
+function checkNumber(){
+
+let num=document.getElementById("Mobile").value;
+let msg=document.getElementById("msg");
+
+if(num.length===10){
+msg.innerHTML="✔ Correct Number";
+msg.style.color="green";
+}else{
+msg.innerHTML="Enter 10 digit number";
+msg.style.color="red";
+}
+
+}
+
+/* Food Type Selection */
+
+function selectProduct(){
+
+let pro=document.getElementById("Foodtype").value;
+let res=document.getElementById("resu");
+
+if(pro==="Vegetarian"){
+res.textContent="🥦 Vegetarian Food Selected";
+}
+else if(pro==="Non-Vegetarian"){
+res.textContent="🍗 Non-Vegetarian Food Selected";
+}
+
+}
+
+/* Save Donation */
+
+function saveDonation(event){
+
+event.preventDefault();
+
+const formData={
+
+Name:document.getElementById("Name").value,
+Phone:document.getElementById("Mobile").value,
+Address:document.getElementById("Address").value,
+Food:document.getElementById("Foodname").value,
+Type:document.getElementById("Foodtype").value,
+Quantity:document.getElementById("Quantity").value,
+Condition:document.getElementById("Condition").value,
+Details:document.getElementById("Details").value
+
+};
+
+let donations=JSON.parse(localStorage.getItem("donations")) || [];
+
+donations.push(formData);
+
+localStorage.setItem("donations",JSON.stringify(donations));
+
+document.getElementById("donateForm").reset();
+
+/* Show popup */
+
+document.getElementById("successPopup").style.display="flex";
+
+}
+
+/* Close Popup */
+
+function closePopup(){
+
+document.getElementById("successPopup").style.display="none";
+
+window.scrollTo({top:0,behavior:"smooth"});
+
+document.getElementById("donationForm").style.display="none";
+
+}
+
+/* Floating Emojis */
+
+const foods=["🍎","🍕","🍔","🥗","🍞","🍲","🥙","🥘","🍛","🥕","🥝","🥫"];
+
+setInterval(()=>{
+
+let emoji=document.createElement("div");
+
+emoji.className="emoji";
+
+emoji.innerHTML=foods[Math.floor(Math.random()*foods.length)];
+
+emoji.style.left=Math.random()*100+"%";
+
+document.body.appendChild(emoji);
+
+setTimeout(()=>emoji.remove(),6000);
+
+},1000);
+
+</script>
+
+</body>
+</html>

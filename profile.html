@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Profile - RePlate</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+padding:0;
+background:linear-gradient(135deg,#e8f5e9,#c8e6c9);
+}
+
+/* Navbar */
+
+nav{
+width:100%;
+padding:20px;
+background:#4CAF50;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:0 25px;
+font-size:18px;
+font-weight:bold;
+}
+
+/* Heading */
+
+h1{
+text-align:center;
+color:#2e7d32;
+margin-top:30px;
+}
+
+#total{
+text-align:center;
+font-size:20px;
+margin:15px;
+font-weight:bold;
+}
+
+/* Search */
+
+.search-box{
+display:block;
+margin:20px auto;
+padding:10px;
+width:250px;
+border-radius:20px;
+border:1px solid #ccc;
+}
+
+/* Impact Section */
+
+.impact-box{
+text-align:center;
+margin:30px auto;
+max-width:800px;
+}
+
+.impact-stats{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.impact-card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:180px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.impact-card h3{
+color:#4CAF50;
+font-size:26px;
+}
+
+/* Donation Cards */
+
+.donation-card{
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(10px);
+padding:20px;
+margin:15px auto;
+max-width:600px;
+border-radius:12px;
+box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Delete Button */
+
+.delete-btn{
+background:#ff5252;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.delete-btn:hover{
+background:#d32f2f;
+}
+
+/* Clear Button */
+
+.clear-btn{
+display:block;
+margin:20px auto;
+padding:10px 20px;
+background:#ff9800;
+color:white;
+border:none;
+border-radius:20px;
+cursor:pointer;
+}
+
+/* Footer */
+
+footer{
+background:#333;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+<a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+<a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+<a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+</nav>
+
+<h1>❤️ You Have Donated</h1>
+
+<p id="total"></p>
+
+<!-- <input type="text" id="searchFood" class="search-box" placeholder="🔍 Search food..." onkeyup="searchDonation()"> -->
+
+<!-- Impact Section -->
+
+<div class="impact-box">
+
+<h2>🌍 Your Food Impact</h2>
+
+<div class="impact-stats">
+
+<div class="impact-card">
+<h3 id="meals"></h3>
+<p>🍽 Meals Shared</p>
+</div>
+
+<div class="impact-card">
+<h3 id="people"></h3>
+<p>👨‍👩‍👧 People Fed</p>
+</div>
+
+<div class="impact-card">
+<h3 id="waste"></h3>
+<p>♻ Food Waste Reduced</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="donationList"></div>
+
+<button class="clear-btn" onclick="clearAll()">Clear All Donations</button>
+
+<script>
+
+let donations = JSON.parse(localStorage.getItem("donations")) || [];
+
+let listContainer = document.getElementById("donationList");
+let total = document.getElementById("total");
+
+/* Total Donations */
+
+total.textContent = "Total Donations: " + donations.length;
+
+/* Impact Counter */
+
+let totalMeals = 0;
+
+donations.forEach(d=>{
+totalMeals += Number(d.Quantity);
+});
+
+let peopleFed = Math.floor(totalMeals/2);
+
+document.getElementById("meals").textContent = totalMeals;
+document.getElementById("people").textContent = peopleFed;
+document.getElementById("waste").textContent = totalMeals + " kg";
+
+/* Display Donations */
+
+function displayDonations(data){
+
+listContainer.innerHTML="";
+
+if(data.length===0){
+
+listContainer.innerHTML="<p style='text-align:center;'>No donations yet.</p>";
+
+return;
+
+}
+
+data.forEach(function(d,index){
+
+listContainer.innerHTML+=`
+
+<div class="donation-card">
+
+<p>👤 <strong>Name:</strong> ${d.Name}</p>
+
+<p>📞 <strong>Phone:</strong> ${d.Phone}</p>
+
+<p>🍛 <strong>Food:</strong> ${d.Food}</p>
+
+<p>🍽 <strong>Quantity:</strong> ${d.Quantity}</p>
+
+<button class="delete-btn" onclick="deleteDonation(${index})">Delete</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+displayDonations(donations);
+
+/* Search Donation */
+
+// function searchDonation(){
+
+// let value=document.getElementById("searchFood").value.toLowerCase();
+
+// let filtered=donations.filter(d=>d.food.toLowerCase().includes(value));
+
+// displayDonations(filtered);
+
+// }
+
+/* Delete Donation */
+
+function deleteDonation(index){
+
+donations.splice(index,1);
+
+localStorage.setItem("donations",JSON.stringify(donations));
+
+location.reload();
+
+}
+
+/* Clear All */
+
+function clearAll(){
+
+if(confirm("Delete all donations?")){
+
+localStorage.removeItem("donations");
+
+location.reload();
+
+}
+
+}
+
+</script>
+
+<footer>
+© 2026 RePlate | Zero Waste Food Donation Initiative
+</footer>
+
+</body>
+</html>
